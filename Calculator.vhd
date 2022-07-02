@@ -45,7 +45,18 @@ component SQRT is
            result : out  STD_LOGIC_VECTOR (7 downto 0));
 end component SQRT;
 
-signal add_res, sub_res, mul_res, div_res : signed (7 downto 0);
+component Logarithm is
+Port ( NUM1 : in  signed (7 downto 0) ;
+          RESULT : out  signed (7 downto 0));
+end component Logarithm;
+
+component Power is 
+Port (  NUM1 : in  signed (7 downto 0) ;
+           NUM2 : in  signed (7 downto 0);
+           RESULT : out  signed (7 downto 0));
+end component Power;
+
+signal add_res, sub_res, mul_res, div_res, log_res, pow_res : signed (7 downto 0);
 signal sqrt_res : STD_LOGIC_VECTOR(7 downto 0);
 signal tmp : STD_LOGIC_VECTOR(15 downto 0);
 begin
@@ -57,6 +68,8 @@ begin
 	res_mul : Multiplication port map(NUM1, NUM2, mul_res);
 	res_div : Division port map(NUM1, NUM2, div_res);
 	res_sqrt : SQRT port map(tmp , sqrt_res);
+	res_log : Logarithm port map(NUM1,log_res);
+	res_pow : Power port map(NUM1, NUM2, pow_res);
 	
 
 	
@@ -66,6 +79,8 @@ begin
 						 mul_res when "010",
 						 div_res when "011",
 						 signed(sqrt_res) when "110",
+						 pow_res when "100",
+						 log_res when "101",
 						 "00000000" when others;
 
 end Behavioral;
