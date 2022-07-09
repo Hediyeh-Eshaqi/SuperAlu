@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   12:11:47 07/09/2022
+-- Create Date:   13:14:51 07/09/2022
 -- Design Name:   
--- Module Name:   D:/code/VHDL/Super_ALU/Files/SuperAlu/tb_Alu_Reg.vhd
+-- Module Name:   D:/code/VHDL/Super_ALU/Files/SuperAlu/tb_Alu.vhd
 -- Project Name:  Super_ALU
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: ALU_Reg
+-- VHDL Test Bench Created by ISE for module: ALU
 -- 
 -- Dependencies:
 -- 
@@ -30,28 +30,28 @@ USE ieee.std_logic_1164.ALL;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-USE ieee.numeric_std.ALL;
+--USE ieee.numeric_std.ALL;
  
-ENTITY tb_Alu_Reg IS
-END tb_Alu_Reg;
+ENTITY tb_Alu IS
+END tb_Alu;
  
-ARCHITECTURE behavior OF tb_Alu_Reg IS 
+ARCHITECTURE behavior OF tb_Alu IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT ALU_Reg
+    COMPONENT ALU
     PORT(
-         Instruction : IN  std_logic_vector(47 downto 0);
-         RESULT : OUT  std_logic_vector(7 downto 0)
+         instruction : IN  std_logic_vector(40 downto 0);
+         ans : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Instruction : std_logic_vector(47 downto 0) := (others => '0');
+   signal instruction : std_logic_vector(40 downto 0) := "00000001"&"00000100"&"00000100"&"00000010"&"000000000";--(others => '0');
 
  	--Outputs
-   signal RESULT : std_logic_vector(7 downto 0);
+   signal ans : std_logic_vector(7 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
@@ -60,19 +60,19 @@ ARCHITECTURE behavior OF tb_Alu_Reg IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: ALU_Reg PORT MAP (
-          Instruction => Instruction,
-          RESULT => RESULT
+   uut: ALU PORT MAP (
+          instruction => instruction,
+          ans => ans
         );
 
    -- Clock process definitions
---   <clock>_process :process
---  begin
---		<clock> <= '0';
---		wait for <clock>_period/2;
---		<clock> <= '1';
---	wait for <clock>_period/2;
--- end process;
+   -- <clock>_process :process
+   -- begin
+	-- 	<clock> <= '0';
+	-- 	wait for <clock>_period/2;
+	-- 	<clock> <= '1';
+	-- 	wait for <clock>_period/2;
+   -- end process;
  
 
    -- Stimulus process
@@ -80,11 +80,8 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 10 ns;	
-      instruction <="000001001000001001000001001000001001000000000001"; -- (9+9)+(9+9) -> reg(1)
-      wait for clock_period*1;
-      instruction <="000001001000001001000001001000001001000000001010"; -- (9+9)+(9-9) -> reg(2)
-      wait for clock_period*1;
-      instruction <="100000001000001001000001001100000010001000000011"; -- (reg(1) - 9)+(9 + reg(2)) -> reg(3)
+      "00100000"&"00000100"&"00000110"&"00001010"&"011000001"; 
+      -- (32 /8) + (6 - 10)
       wait for clock_period*1;
 
       -- insert stimulus here 

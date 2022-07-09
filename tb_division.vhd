@@ -69,14 +69,20 @@ BEGIN
 		-- * RESULT SHOULD BE 2 ==> RESULT = 00000010 *
 		
 		
-		--###fourht case###
+		--###fourth case###
 		wait for 100 ns;
 		
       NUM1 <= "00001111"; -- num1 = 15
 		NUM2 <= "00000101"; --num2 = 5
 		-- * RESULT SHOULD BE 3 ==> RESULT = 00000011 *	
 
-      
+		--###fifth case###
+      wait for 100 ns;
+		
+      NUM1 <= "00000000"; -- num1 = 0
+		-- NUM2 <= "00000000"; --num2 = 0
+		-- * RESULT SHOULD BE 3 ==> RESULT = 00000011 *	
+
 
       wait;
    end process;
