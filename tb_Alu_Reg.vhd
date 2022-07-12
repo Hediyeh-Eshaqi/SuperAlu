@@ -48,7 +48,8 @@ ARCHITECTURE behavior OF tb_Alu_Reg IS
     
 
    --Inputs
-   signal Instruction : std_logic_vector(47 downto 0) := (others => '0');
+   signal Instruction : std_logic_vector(47 downto 0) := "000"&"000110000"&"000001001"&"000000001"&"000011001"&"000001001"; 
+	-- (9+1) + (sqrt(25)) -->reg(0)
 
  	--Outputs
    signal RESULT : std_logic_vector(7 downto 0);
@@ -80,11 +81,11 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 10 ns;	
-      instruction <="000001001000001001000001001000001001000000000001"; -- (9+9)+(9+9) -> reg(1)
+      instruction <="001"&"000000000"&"000001001"&"000001001"&"000001001"&"000001001"; -- (9+9)+(9+9) -> reg(1)
       wait for clock_period*1;
-      instruction <="000001001000001001000001001000001001000000001010"; -- (9+9)+(9-9) -> reg(2)
+      instruction <="010"&"000000001"&"000000111"&"000010011"&"000011001"&"000001001"; -- (7+19)+(27-9) -> reg(2)
       wait for clock_period*1;
-      instruction <="100000001000001001000001001100000010001000000011"; -- (reg(1) - 9)+(9 + reg(2)) -> reg(3)
+      instruction <="011"&"001000000"&"100000001"&"000001001"&"000001001"&"100000010"; -- (reg(1) - 9)+(9 + reg(2)) -> reg(3)
       wait for clock_period*1;
 
       -- insert stimulus here 
