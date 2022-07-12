@@ -80,8 +80,11 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 10 ns;	
-      "00100000"&"00000100"&"00000110"&"00001010"&"011000001"; 
+      instruction <= "00100000"&"00000100"&"00000110"&"00001010"&"011000001"; 
       -- (32 /8) + (6 - 10)
+      wait for clock_period*1;
+      instruction <= "00010000"&"00000100"&"00000110"&"00000011"&"010000001"; 
+      -- (16 * 8) + (6 - 10)
       wait for clock_period*1;
 
       -- insert stimulus here 

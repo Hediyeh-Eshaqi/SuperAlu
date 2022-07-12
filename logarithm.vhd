@@ -18,7 +18,7 @@ function Log2( input:integer ) return integer is
 		i:=0;
 		temp:=input;
 		log:=0;
-		for i in 0 to 100 loop
+		for i in 0 to 10 loop
 			if (temp > 1) then
 				temp:=temp/2;
 				log:=log+1;

@@ -156,7 +156,6 @@ begin
     data:= data_in;
     data_out <= data;
 
-
 end process;
 
 end Behavioral;

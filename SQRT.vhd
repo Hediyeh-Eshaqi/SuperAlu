@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity SQRT is
-    Generic ( b  : natural range 4 to 32 := 16 ); 
+    Generic ( b  : natural range 4 to 32 := 10 ); 
     Port ( value  : in   STD_LOGIC_VECTOR (15 downto 0);
            result : out  STD_LOGIC_VECTOR (7 downto 0));
 end SQRT;

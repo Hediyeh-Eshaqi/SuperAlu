@@ -57,13 +57,13 @@ component oporators is
 end component oporators;
 
 -- signals for output of oporators 
-signal	opt1 : 	STD_LOGIC_VECTOR (2 downto 0); -- oporator for first Calculator
-signal	opt2 : 	STD_LOGIC_VECTOR (2 downto 0); -- oporator for second Calculator
-signal	opt3 : 	STD_LOGIC_VECTOR (2 downto 0); -- oporator for output Calculator
-signal	n1 :   	STD_LOGIC_VECTOR (7 downto 0);
-signal	n2 :   	STD_LOGIC_VECTOR (7 downto 0);
-signal	n3 :   	STD_LOGIC_VECTOR (7 downto 0);
-signal	n4 :   	STD_LOGIC_VECTOR (7 downto 0);
+signal	opt1 : 	STD_LOGIC_VECTOR (2 downto 0):=(others=>'0'); -- oporator for first Calculator
+signal	opt2 : 	STD_LOGIC_VECTOR (2 downto 0):=(others=>'0'); -- oporator for second Calculator
+signal	opt3 : 	STD_LOGIC_VECTOR (2 downto 0):=(others=>'0'); -- oporator for output Calculator
+signal	n1 :   	STD_LOGIC_VECTOR (7 downto 0):= "00000001";
+signal	n2 :   	STD_LOGIC_VECTOR (7 downto 0):= "00000001";
+signal	n3 :   	STD_LOGIC_VECTOR (7 downto 0):= "00000001";
+signal	n4 :   	STD_LOGIC_VECTOR (7 downto 0):= "00000001";
 
 -- signals for output of first Calculator
 signal	cal1 : signed (7 downto 0);
