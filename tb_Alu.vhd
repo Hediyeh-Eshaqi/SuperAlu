@@ -48,7 +48,7 @@ ARCHITECTURE behavior OF tb_Alu IS
     
 
    --Inputs
-   signal instruction : std_logic_vector(40 downto 0) := "000000001"&"00000011"&"00000100"&"00001100"&"00001010";--(others => '0');
+   signal instruction : std_logic_vector(40 downto 0) := "000000000"&"00000011"&"00000100"&"00001100"&"00001010";--(others => '0');
 
  	--Outputs
    signal ans : signed(7 downto 0);
@@ -79,12 +79,15 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 10 ns. 011000001001000000000010000000110000001010
-      -- wait for 10 ns;	
+      wait for 10 ns;	
       instruction <= "011000001"&"00010001"&"00000100"&"00000110"&"00001010"; 
-      -- (17 /8) + (6 - 10)
+      -- (17 /8) - (6 + 10)
       wait for clock_period*1;
-      instruction <= "110000001"&"00011110"&"00000100"&"00000110"&"00000011"; 
-      -- (18 * 8) + (6 - 10)
+      instruction <= "110000001"&"00011110"&"00000100"&"00000111"&"00000011"; 
+      -- (18 * 8) - (6 + 3)
+      wait for clock_period*1;
+      instruction <= "100110000"&"00000011"&"00000010"&"00001001"&"00001010";
+		-- (3 ** 2) + ( sqrt(9))
       wait for clock_period*1;
 
 

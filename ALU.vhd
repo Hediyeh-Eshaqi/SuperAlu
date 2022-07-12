@@ -30,7 +30,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity ALU is
-    Port ( instruction : in  STD_LOGIC_VECTOR (40 downto 0):= "011000001"&"00000001"&"00000100"&"00011000"&"00001010";
+    Port ( instruction : in  STD_LOGIC_VECTOR (40 downto 0):= "000000000"&"00001111"&"00000100"&"00011000"&"00001010";
            ans : out  signed (7 downto 0));
 end ALU;
 
@@ -74,16 +74,24 @@ signal	cal2 : signed (7 downto 0);
 
 begin
 
-	op: oporators port map(
-		ins=>instruction,
-		opt1=>opt1,
-		opt2=> opt2,
-		opt3 => opt3,
-		n1 => n1,
-		n2 => n2,
-		n3 => n3,
-		n4 => n4
-	);
+	-- op: oporators port map(
+	-- 	ins=>instruction,
+	-- 	opt1=>opt1,
+	-- 	opt2=> opt2,
+	-- 	opt3 => opt3,
+	-- 	n1 => n1,
+	-- 	n2 => n2,
+	-- 	n3 => n3,
+	-- 	n4 => n4
+	-- );
+	
+	opt1 <= instruction(40 downto 38);
+	opt2 <= instruction(37 downto 35);
+	opt3 <= instruction(34 downto 32);
+	n1 <= instruction(31 downto 24);
+	n2 <= instruction(23 downto 16);
+	n3 <= instruction(15 downto 8);
+	n4 <= instruction(7 downto 0);
 
 	first_c: Calculator port map(
 		NUM1 => signed(n1),
