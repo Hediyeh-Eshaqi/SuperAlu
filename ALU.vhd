@@ -30,7 +30,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity ALU is
-    Port ( instruction : in  STD_LOGIC_VECTOR (40 downto 0);
+    Port ( instruction : in  STD_LOGIC_VECTOR (40 downto 0):= "011000001"&"00000001"&"00000100"&"00011000"&"00001010";
            ans : out  signed (7 downto 0));
 end ALU;
 

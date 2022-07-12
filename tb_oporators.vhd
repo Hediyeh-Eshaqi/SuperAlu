@@ -54,7 +54,7 @@ ARCHITECTURE behavior OF tb_oporators IS
     
 
    --Inputs
-   signal ins : std_logic_vector(40 downto 0) := (others => '0');
+   signal ins : std_logic_vector(40 downto 0) := ( 1 downto 0 => '1' ,others => '0');
 
  	--Outputs
    signal opt1 : std_logic_vector(2 downto 0);
@@ -97,11 +97,11 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 20 ns;	
+      -- wait for 20 ns;	
 		
 		
 		
-		ins <= (others =>'0');
+		ins <= ( 2 downto 0=>'1',others =>'0');
       wait for clock_period;
 		ins <= (others =>'1');
       wait for clock_period;
@@ -109,7 +109,13 @@ BEGIN
       wait for clock_period;
 		ins <= "001110111"&x"8b100217";
       wait for clock_period;
-
+      ins <= "011000001"&"00010001"&"00000100"&"00000110"&"00001010";
+      wait for clock_period;
+      ins <= "010000001"&"00010010"&"00000100"&"00000110"&"00000011";
+      wait for clock_period;
+      ins <= "000100001"&"00000011"&"00000100"&"00001100"&"00001010";
+      wait for clock_period;
+      
       -- insert stimulus here 
 
       wait;

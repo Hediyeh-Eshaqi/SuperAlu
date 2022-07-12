@@ -30,7 +30,7 @@ USE ieee.std_logic_1164.ALL;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+USE ieee.numeric_std.ALL;
  
 ENTITY tb_Alu IS
 END tb_Alu;
@@ -42,16 +42,16 @@ ARCHITECTURE behavior OF tb_Alu IS
     COMPONENT ALU
     PORT(
          instruction : IN  std_logic_vector(40 downto 0);
-         ans : OUT  std_logic_vector(7 downto 0)
+         ans : OUT  signed(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal instruction : std_logic_vector(40 downto 0) := "00000001"&"00000100"&"00000100"&"00000010"&"000000000";--(others => '0');
+   signal instruction : std_logic_vector(40 downto 0) := "000000001"&"00000011"&"00000100"&"00001100"&"00001010";--(others => '0');
 
  	--Outputs
-   signal ans : std_logic_vector(7 downto 0);
+   signal ans : signed(7 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
@@ -78,16 +78,15 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      -- hold reset state for 100 ns.
-      wait for 10 ns;	
-      instruction <= "00100000"&"00000100"&"00000110"&"00001010"&"011000001"; 
-      -- (32 /8) + (6 - 10)
+      -- hold reset state for 10 ns. 011000001001000000000010000000110000001010
+      -- wait for 10 ns;	
+      instruction <= "011000001"&"00010001"&"00000100"&"00000110"&"00001010"; 
+      -- (17 /8) + (6 - 10)
       wait for clock_period*1;
-      instruction <= "00010000"&"00000100"&"00000110"&"00000011"&"010000001"; 
-      -- (16 * 8) + (6 - 10)
+      instruction <= "110000001"&"00011110"&"00000100"&"00000110"&"00000011"; 
+      -- (18 * 8) + (6 - 10)
       wait for clock_period*1;
 
-      -- insert stimulus here 
 
       wait;
    end process;

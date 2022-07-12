@@ -80,49 +80,49 @@ begin
     reg_en<=(others => '0');
     --index :=(others=>'0');
 
-    -- decode Instruction (n1 46 - 39) (n2 37 - 30) (n3 28 - 21) (n4 19 - 12)
-    -- (opt1 11-9) (opt2 8-6) (opt3 5-3) (out_reg 2-0)
-        if Instruction(47)='1'
+    -- decode Instruction (n1 34 downto 27) (n2 25 downto 18) (n3 16 downto 9) (n4 7 downto 0)
+    -- (opt1 44-42) (opt2 41-39) (opt3 38-36) (out_reg 47-45)
+        if Instruction(35)='1'
         then
             -- index := std_logic_vector(to_signed(to_integer(signed (instruction(46 downto 39))),3));
-            index := to_integer(signed (instruction(46 downto 39)));
-            ins_v(40 downto 33):= std_logic_vector(reg_out(index));
+            index := to_integer(signed (instruction(34 downto 27)));
+            ins_v(31 downto 24):= std_logic_vector(reg_out(index));
         else
-            ins_v(40 downto 33):=instruction(46 downto 39);
+            ins_v(31 downto 24):=instruction(34 downto 27);
 
         end if;
-        if Instruction(38)='1'
+        if Instruction(26)='1'
         then
             -- index := std_logic_vector(to_signed(to_integer(signed(instruction(37 downto 30))),3));
-            index := to_integer(signed(instruction(37 downto 30)));
-            ins_v(32 downto 25):= std_logic_vector(reg_out(index));
+            index := to_integer(signed(instruction(25 downto 18)));
+            ins_v(23 downto 16):= std_logic_vector(reg_out(index));
         else
-            ins_v(32 downto 25):=instruction(37 downto 30);
+            ins_v(23 downto 16):=instruction(25 downto 18);
 
         end if;
-        if Instruction(29)='1'
+        if Instruction(17)='1'
         then
             -- index := std_logic_vector(to_signed(to_integer(signed (instruction(28 downto 21))),3));
-            index := to_integer(signed (instruction(28 downto 21)));
-            ins_v(24 downto 17):= std_logic_vector(reg_out(index));
+            index := to_integer(signed (instruction(16 downto 9)));
+            ins_v(15 downto 8):= std_logic_vector(reg_out(index));
         else
-            ins_v(24 downto 17):=instruction(28 downto 21);
+            ins_v(15 downto 8):=instruction(16 downto 9);
 
         end if;
-        if Instruction(20)='1'
+        if Instruction(8)='1'
         then
             -- index := std_logic_vector(to_signed(to_integer(signed (instruction(19 downto 12))),3));
-            index := to_integer(signed(instruction(19 downto 12)));
-            ins_v(16 downto 9):= std_logic_vector(reg_out(index));
+            index := to_integer(signed(instruction(7 downto 0)));
+            ins_v(7 downto 0):= std_logic_vector(reg_out(index));
         else
-            ins_v(16 downto 9):=instruction(19 downto 12);
+            ins_v(7 downto 0):=instruction(7 downto 0);
 
         end if;
-        ins_v(8 downto 0) := instruction(11 downto 3);
+        ins_v(40 downto 32) := instruction(44 downto 36);
 
         
         -- set instruction output enable
-        reg_en(to_integer(unsigned(instruction(2 downto 0)))) <= '1';
+        reg_en(to_integer(unsigned(instruction(47 downto 45)))) <= '1';
     
         alu_instruction <= ins_v;
     end process alu_in;
